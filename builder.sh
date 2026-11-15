@@ -21,9 +21,8 @@ _appimagetool() {
 	./appimagetool "$@"
 }
 
-DOWNLOAD_PAGE=$(curl -Ls https://api.github.com/repos/kovidgoyal/calibre/releases)
-DOWNLOAD_URL=$(echo "$DOWNLOAD_PAGE" | sed 's/[()",{} ]/\n/g' | grep -i "http.*$ARCH.txz$" | head -1)
-VERSION=$(echo "$DOWNLOAD_URL" | tr '/-' '\n' | grep "^[0-9]")
+DOWNLOAD_URL="https://download.calibre-ebook.com/4.23.0/calibre-4.23.0-x86_64.txz"
+VERSION="4.23.0"
 [ ! -f "$APP.txz" ] && curl -#Lo "$APP.txz" "$DOWNLOAD_URL"
 mkdir -p "$APP".AppDir || exit 1
 
